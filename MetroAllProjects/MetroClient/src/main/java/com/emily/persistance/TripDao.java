@@ -8,4 +8,5 @@ import com.emily.entity.Trip;
 @Repository
 public interface TripDao extends JpaRepository<Trip, Integer>{
 
+	public Trip findTripByCustomerId(int customerId);
 }

@@ -52,11 +52,7 @@ public class CustomerResource {
 		return service.topUpbalance(id, amount);
 	}
 	
-	//update customer's starting point 
-	@PutMapping(path = "customers/resetStation/{cId}/{sId}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public void setStationIdToCustomerResource(@PathVariable("cId") int id, @PathVariable("sId")int stationId) {
-		 service.setStationIdToCustomer(id, stationId);
-	}
+	
 	
 
 }

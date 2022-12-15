@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.emily.entity.Customer;
 import com.emily.entity.Station;
 import com.emily.service.ClientServiceImpl;
+import com.maria.resource.Trip;
 
 
 
@@ -36,13 +37,7 @@ public class ClientResource {
 		return service.getStation(stationId);
 		
 	}
-	
-  //update customer's starting point 
-  	@PutMapping(path = "customers/resetStation/{cId}/{sId}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public Customer updateStationResource(@PathVariable ("cId") int customerId, @PathVariable ("sId") int stationId) {
-  	return service.setNewStationId(customerId, stationId);
-  	
-  	}
+
   	//get customer by Id
   	@GetMapping(path = "customers/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Customer getCustomerByIdResource(@PathVariable("id") int id) {
@@ -61,7 +56,12 @@ public class ClientResource {
   		return service.deductCustomerBalance(customerId, amount);
   	}
   	
-  	
+  //add new trip
+  		@PostMapping(path = "trips/tapIn/:{cId}/:{startStationId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  		public Trip tapIn(@PathVariable ("cId") int customerId, @PathVariable ("startStationId") int stationId) {
+  			return service;
+
+  		}
   	
 }
 

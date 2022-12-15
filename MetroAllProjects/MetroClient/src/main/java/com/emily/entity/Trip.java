@@ -20,9 +20,23 @@ public class Trip {
     @GeneratedValue
     private int customerId;
     private int tripId;
-    private String SwipeInStation;
-    private String SwipeOutStation;
-    private LocalDateTime SwipeInDateAnTime;
-    private LocalDateTime SwipeOutDateAndTime;
+    private int swipeInStationId;
+    private int swipeOutStationId;
+    private LocalDateTime swipeInDateAnTime;
+    private LocalDateTime swipeOutDateAndTime;
     private double tripFare;
+    
+    
+	public Trip(int customerId,int swipeInStation, LocalDateTime swipeInDateAnTime) {
+		
+		this.customerId = customerId;
+		this.swipeInStationId = swipeInStation;
+		this.swipeInDateAnTime = swipeInDateAnTime;
+	}
+    
+    
+    
+    
+    
+    
 }

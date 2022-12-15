@@ -61,7 +61,7 @@ class MetroCustomerApplicationTests {
 	public void testAddCustomer() {
 
 		LocalDate date = LocalDate.of(2010, 1, 8);
-		Customer customer = new Customer(103, "Helen", "Bower", "helen@gmail.com", date, 100, 0);
+		Customer customer = new Customer(103, "Helen", "Bower", "helen@gmail.com", date, 100);
 		assertEquals(customer,service.addCustomer(customer));
 	}
 	
@@ -71,7 +71,7 @@ class MetroCustomerApplicationTests {
 	 public void testAddCustomerTwo() {
 	
 		LocalDate date = LocalDate.of(2020, 1, 8);
-		Customer customer = new Customer(102, "Helen", "Bower", "helen@gmail.com", date, 100, 0);
+		Customer customer = new Customer(102, "Helen", "Bower", "helen@gmail.com", date, 100);
 		assertNull(service.addCustomer(customer));
 		
 			}
@@ -91,7 +91,7 @@ class MetroCustomerApplicationTests {
 	@Order(4)
 	public void testDeductBalance() {
 		LocalDate date = LocalDate.of(1995, 8, 16);
-		Customer customer = new Customer(104,"Megan","Tales", "megan@gmail.com",date,100,0);
+		Customer customer = new Customer(104,"Megan","Tales", "megan@gmail.com",date,100);
 		when(dao.findById(104)).thenReturn(Optional.of(customer));
 		//assertTrue(service.getCustomer(104) !=null);
 		assertTrue(service.deductBalance(104,5).getCustomerBalance()==95);
@@ -102,7 +102,7 @@ class MetroCustomerApplicationTests {
 	@Order(5)
 	public void testTopUpbalance() {
 		LocalDate date = LocalDate.of(1994, 4, 11);
-		Customer customer = new Customer(105,"Bob","Bells", "bob@gmail.com",date,100,0);
+		Customer customer = new Customer(105,"Bob","Bells", "bob@gmail.com",date,100);
 		when(dao.findById(105)).thenReturn(Optional.of(customer));
 		assertTrue(service.topUpbalance(105, 10).getCustomerBalance()==110);
 	}
@@ -113,7 +113,7 @@ class MetroCustomerApplicationTests {
 	@Order(6)
 	public void testGetCustomer() {
 		LocalDate date = LocalDate.of(1990, 5, 16);
-		Customer customer = new Customer(106,"Shana","Sparks", "shana@gmail.com",date,100,0);
+		Customer customer = new Customer(106,"Shana","Sparks", "shana@gmail.com",date,100);
 		when(dao.findById(106)).thenReturn(Optional.of(customer));
 		assertTrue(service.getCustomer(106) !=null);
 	}

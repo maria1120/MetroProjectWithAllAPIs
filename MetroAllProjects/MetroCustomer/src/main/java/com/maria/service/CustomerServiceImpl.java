@@ -80,16 +80,7 @@ public class CustomerServiceImpl implements CustomerService{
 		return null;
 	}
 	
-	public Customer setStationIdToCustomer(int id, int stationId) {
-		Customer customer = getCustomer(id);
-		if(customer !=null) {
-			customer.setStationId(stationId);
-			 dao.save(customer);
-		return customer;
-		}
-		return null;
-		
-	}
+
 	
 	
 

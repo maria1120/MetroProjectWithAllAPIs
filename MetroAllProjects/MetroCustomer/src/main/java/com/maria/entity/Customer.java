@@ -29,7 +29,7 @@ public class Customer {
 	private String customerEmail;
 	private LocalDate customerDateOfBirth;
 	private double customerBalance;
-	private int stationId;
+	
 	
 	
 	

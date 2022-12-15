@@ -2,6 +2,7 @@ package com.emily.service;
 
 
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import com.emily.entity.Bill;
 import com.emily.entity.Customer;
 import com.emily.entity.Station;
 import com.emily.entity.StationList;
+import com.emily.entity.Trip;
+import com.emily.persistance.TripDao;
 
 
 @Service
@@ -20,6 +23,9 @@ public class ClientServiceImpl implements ClientService {
 	// Import RestTemplate to call Rest API - to connect to customer database
 		@Autowired
 		private RestTemplate restTemplate;
+		
+		@Autowired
+		private TripDao dao;
 
 		@Override
 		public Customer loginCheck(int id) {	
@@ -41,22 +47,24 @@ public class ClientServiceImpl implements ClientService {
 			}
 		}
 		
-      // Get all Stations
 		
-		
-		//method to change stationId in customer
-		public Customer setNewStationId(int customerId, int stationId) {
+		//tapIn method-return new Trip object or null, if the customer does not have enough balance
+		public Trip tapIn(int customerId, int swipeInStationId) {
 			
-			restTemplate.put("http://localhost:8089/customers/resetStation/"+customerId+ "/" + stationId, Customer.class);
-			Customer customer = loginCheck(customerId);
-			if(customer.getStationId()==stationId) {
-			return customer;
+			if(loginCheck(customerId).getCustomerBalance()<5) {
+				return null;
 			}
-			return null;
+			
+			Trip trip = new Trip(customerId, swipeInStationId, LocalDateTime.now());
+			dao.save(trip);
+			return trip;
 		}
 		
 		
+	
 		
+		
+		// Get all Stations
 		@Override
 		public Collection<Station> getAllStations() {
 			try {
