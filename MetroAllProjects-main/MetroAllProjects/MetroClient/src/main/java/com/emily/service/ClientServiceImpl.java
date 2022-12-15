@@ -61,9 +61,6 @@ public class ClientServiceImpl implements ClientService {
 		}
 		
 		
-	
-		
-		
 		// Get all Stations
 		@Override
 		public Collection<Station> getAllStations() {
@@ -74,8 +71,8 @@ public class ClientServiceImpl implements ClientService {
 			} catch(Exception exception) {
 				return null;
 			}
-		
 		}
+		
 		@Override
 		public Customer deductCustomerBalance(int customerId, double amount) {
 			try {
@@ -93,14 +90,12 @@ public class ClientServiceImpl implements ClientService {
 		}
 		
 		//get station by station id
-		public String getStation(int stationId) {
-			
-			
+		public Station getStationById(int stationId) {
          Collection<Station> allStations = getAllStations();
 			
-			for(Station s: allStations) {
-				if(s.getStationId()==stationId) {
-				 return s.getStationName();
+			for(Station station: allStations) {
+				if(station.getStationId()==stationId) {
+				 return station;
 				}
 	
 			}
@@ -118,12 +113,13 @@ public class ClientServiceImpl implements ClientService {
 		public Bill tapOut(int swipeOutStationId,Customer customer,int tripId, double price) {
 			
 			List<Trip> tripList = dao.findTripsByCustomerId(customer.getCustomerId());
-			Trip trip = tripList.get(tripId);
 			
+			for(Trip trip:tripList) {
+				if (trip.getTripId()==tripId) {
 			
 			int swipeInStationId = trip.getSwipeInStationId();
-			String swipeInStationName = getStation(swipeInStationId);
-			String swipeOutStationName=getStation(swipeOutStationId);
+			String swipeInStationName = getStationById(swipeInStationId).getStationName();
+			String swipeOutStationName=getStationById(swipeOutStationId).getStationName();
 			
 			double amountToPay = calculatePrice(swipeOutStationId,swipeInStationId ,price);
 			
@@ -137,12 +133,18 @@ public class ClientServiceImpl implements ClientService {
 			trip.setTripFare(amountToPay);
 			
 			dao.save(trip);
+			return bill;
+				
+			}//end of if customer !=null
 			
-			return bill;	
-			}
+				}//end of if trip.getTripId()==tripId
+				
+			}//end of for loop
 			return null;
+				
 			}
-
+		
+		
 		
 		
 
