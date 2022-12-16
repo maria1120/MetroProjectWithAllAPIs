@@ -9,14 +9,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Bill {
 
-	
+public class Bill {
 	private String customerFirstName;
 	private String customerSurname;
 	private String startingStation;
 	private String endStation;
 	private double totalPrice;
 	private double newBalance;
-}
 
+}
